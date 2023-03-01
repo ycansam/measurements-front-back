@@ -4,6 +4,11 @@ import User from "../models/user.model";
 class UsersController {
     public login = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
         const { username, password } = req.body as User;
+        await usersLogic.login({ username, password }).then(token => {
+            return res.status(200).json({ content: { token }, message: "User logged correctly" });
+        }).catch(err => {
+            return res.status(400).json(err);
+        })
     }
 
     public register = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
