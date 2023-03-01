@@ -1,4 +1,5 @@
 import Endpoints from "../Endpoints";
+import usersController from "../controllers/users.controller";
 import AppRouter from "../router";
 
 class UsersRouter extends AppRouter {
@@ -8,9 +9,9 @@ class UsersRouter extends AppRouter {
         this.login();
     }
 
-    private register = () => this.router.post(Endpoints.USERS.REGISTER);
+    private register = () => this.router.post(Endpoints.USERS.REGISTER, usersController.register);
 
-    private login = () => this.router.post(Endpoints.USERS.LOGIN);
+    private login = () => this.router.post(Endpoints.USERS.LOGIN, usersController.login);
 }
 
 const usersRouter: UsersRouter = new UsersRouter();
