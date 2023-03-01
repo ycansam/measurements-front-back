@@ -1,9 +1,9 @@
 require('dotenv').config();
 import express, { Application, urlencoded } from 'express';
 import Endpoints from './Endpoints';
+import wineMeasurementsRoutes from './routes/wineMeasurements.routes';
+import usersRoutes from './routes/users.routes';
 const cors = require('cors');
-
-
 class Server {
     private app: Application;
     private readonly port: number = 3001;
@@ -15,7 +15,6 @@ class Server {
     constructor() {
         this.app = express();
         this.configure();
-        this.connectDatabase();
         this.setRoutes();
         this.startServer();
     }
@@ -27,11 +26,9 @@ class Server {
 
     }
 
-    private connectDatabase(): void {
-        Database.connect();
-    }
-
     private setRoutes(): void {
+        this.app.use(Endpoints.USERS.DEFAULT_PATH, usersRoutes);
+        this.app.use(Endpoints.WINE_MEASUREMENTS.DEFAULT_PATH, wineMeasurementsRoutes);
     }
 
 
