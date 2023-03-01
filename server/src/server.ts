@@ -1,9 +1,9 @@
-require('dotenv').config();
 import express, { Application, urlencoded } from 'express';
 import Endpoints from './Endpoints';
 import wineMeasurementsRoutes from './routes/wineMeasurements.routes';
 import usersRoutes from './routes/users.routes';
 const cors = require('cors');
+
 class Server {
     private app: Application;
     private readonly port: number = 3001;

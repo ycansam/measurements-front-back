@@ -1,6 +1,5 @@
 
 import mysql, { Connection } from "promise-mysql";
-
 interface DatabaseProperties {
     host: string;
     user: string;
@@ -16,20 +15,20 @@ class Database {
     private database: string = 'wine_measurements';
 
 
-    public async createQuery(query: string): Promise<void> {
+    public async createQuery(query: string): Promise<any> {
         const conn = await this.connect();
         return await conn.query(query)
             .then(res => {
                 this.finishConnection(conn)
                 return Promise.resolve(res);
             })
-            .catch(err => new Error(err))
+            .catch(err => Promise.reject(err))
     }
 
     private async connect(): Promise<Connection> {
         return await mysql.createConnection(this.getProperties());
     }
-    
+
     private finishConnection(conn: Connection): void {
         conn.end();
     }
