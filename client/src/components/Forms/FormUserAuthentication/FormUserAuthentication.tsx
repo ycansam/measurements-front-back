@@ -1,31 +1,21 @@
-import { useState, useCallback } from "react";
 import InputWithLabel from "../Inputs/InputWithLabel/InputWIthLabel";
-import SubmitButtonLogin from "./SubmitButtons/SubmitButtonLogin";
-import SubmitButtonRegister from "./SubmitButtons/SubmitButtonRegister";
-interface FormUserAuthentication {
+import FormUserAuthenticationHooks from "./hooks/FormUserAuthentication.hooks";
+import FormUserAuthenticationService from "./services/FormUserAuthentication.service";
+
+interface FormUserAuthenticationProps {
     authenticationType: "register" | "login";
 }
+const FormUserAuthentication: React.FC<FormUserAuthenticationProps> = ({ authenticationType }) => {
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-const FormUserAuthentication: React.FC<FormUserAuthentication> = ({ authenticationType }) => {
-
-    const [state, setState] = useState({
-        username: '',
-        password: ''
-    })
-
-    const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setState((prevState) => ({ ...prevState, [name]: value }));
-    }, [setState]);
-
+    const { state, handleChange } = FormUserAuthenticationHooks();
+    const { handleSubmit } = FormUserAuthenticationService({ state, authenticationType });
 
     return (
-        <form>
-            <InputWithLabel label="Usuario" name="username" onChange={handleChange} value={state.username} />
-            <InputWithLabel label="Contraseña" name="password" onChange={handleChange} value={state.password} />
-            {authenticationType === "register" && <SubmitButtonRegister />}
-            {authenticationType === "login" && <SubmitButtonLogin />}
+        <form onSubmit={handleSubmit}>
+            <InputWithLabel label="Usuario" name="username" type="text" onChange={handleChange} value={state.username} />
+            <InputWithLabel label="Contraseña" name="password" type="password" onChange={handleChange} value={state.password} />
+            {authenticationType === "login" && <button type="submit">Login</button>}
+            {authenticationType === "register" && <button type="submit">Register</button>}
         </form>
     )
 }
