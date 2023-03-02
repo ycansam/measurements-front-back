@@ -10,7 +10,7 @@ import UsersQueries from "../queries/users.queries";
 
 class UsersLogic {
 
-    public register = async ({ username, password }: User): Promise<any> => {
+    public register = async ({ username, password }: User): Promise<object | boolean> => {
 
         const hashedPass = await this.hashPassword(password);
         if (!hashedPass) return Promise.reject("Error on hashing password");

@@ -1,4 +1,4 @@
-interface WineMeasurement {
+interface WineMeasure {
     id?: number;
     year: number;
     variety: Enumerator;
@@ -7,5 +7,6 @@ interface WineMeasurement {
     temperature: number;
     graduation: number;
     hydrogen_potencial: number;
-    observations: string;
+    observations?: string;
 }
+export default WineMeasure;

@@ -8,7 +8,7 @@ export default class Endpoints {
     };
 
     static readonly WINE_MEASUREMENTS = {
-        DEFAULT_PATH: this.DEFAULT_PATH,
+        DEFAULT_PATH: this.DEFAULT_PATH + "measurements",
         GET_ALL: "/",
         CREATE: "/",
     };

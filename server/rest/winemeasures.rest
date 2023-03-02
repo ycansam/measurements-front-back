@@ -1,0 +1,18 @@
+
+###
+GET http://localhost:3001/measurements
+
+
+###
+POST http://localhost:3001/measurements
+Content-Type: application/json
+
+{
+    "year": 1922,
+    "variety": "Syrah",
+    "type": "Vino tinto",
+    "color": "holaasasdasdaa",
+    "temperature": 4.0,
+    "graduation": 3.0,
+    "hydrogen_potencial": 2
+}
