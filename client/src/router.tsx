@@ -4,16 +4,18 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './index.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import WineMeasurements from './pages/WineMeasurements';
+import Home from './pages/Home';
+import CheckUserAuthentication from './components/CheckUserAuthentication/CheckUserAuthentication';
+import PagePaths from './page-paths';
 const RouterRoutes: React.FC = () => {
 
     return (
         <Router>
             <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/wineMeasurements" element={<WineMeasurements />} />
-                <Route path="*" element={<div>Not Found 404</div>} />
+                <Route path={PagePaths.LOGIN} element={<Login />} />
+                <Route path={PagePaths.REGISTER} element={<Register />} />
+                <Route path={PagePaths.HOME} element={<Home />} />
+                <Route path="*" element={<CheckUserAuthentication />} />
             </Routes>
         </Router>
     )

@@ -53,8 +53,6 @@ class UsersLogic {
         return jwt.sign({ id: user.id, username: user.username }, PRIVATE_JWT, { expiresIn: TIME_TO_EXPIRE });
     }
 
-
-
     private findUserByUsername = async (username: string): Promise<User | boolean> => {
         const foundUser = await database.createQuery(UsersQueries.GET_BY_USERNAME(username));
         if (foundUser.length > 0) return foundUser[0] as User;

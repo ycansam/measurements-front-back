@@ -1,11 +1,6 @@
 import { useState, useCallback } from "react";
 import User from "../../../../models/user.model";
-import { ChangeEvent } from "react";
-
-interface FormUserAuthenticationHooksReturn {
-    state: User;
-    handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
-}
+import FormUserAuthenticationHooksReturn from "../models/FormUserAuthenticationHooksReturn";
 
 const FormUserAuthenticationHooks = (): FormUserAuthenticationHooksReturn => {
 

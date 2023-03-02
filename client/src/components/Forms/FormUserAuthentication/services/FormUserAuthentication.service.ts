@@ -1,15 +1,13 @@
 import usersService from "../../../../services/podcasts.service";
 import User from "../../../../models/user.model";
-interface FormUserAuthenticationServiceProps {
-    state: User
-    authenticationType: "register" | "login";
-}
-
-interface FormUserAuthenticationServiceReturn {
-    handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-}
-
+import { useNavigate } from "react-router";
+import userJWTCache from "../../../../services/cache/userJWT.cache";
+import PagePaths from "../../../../page-paths";
+import FormUserAuthenticationServiceProps from "../models/FormUserAuthenticationServiceProps.model";
+import FormUserAuthenticationServiceReturn from "../models/FormUserAuthenticationServiceReturn";
 const FormUserAuthenticationService = ({ state, authenticationType }: FormUserAuthenticationServiceProps): FormUserAuthenticationServiceReturn => {
+
+    const navigate = useNavigate();
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -19,7 +17,9 @@ const FormUserAuthenticationService = ({ state, authenticationType }: FormUserAu
 
     const submitLogin = () => {
         usersService.login(state).then(res => {
-            console.log(res);
+            const { token } = res.data.content;
+            userJWTCache.saveToken(token);
+            navigate(PagePaths.HOME);
         }).catch(err => {
             console.log({ message: err.response.data, err });
         })
@@ -27,7 +27,7 @@ const FormUserAuthenticationService = ({ state, authenticationType }: FormUserAu
 
     const submitRegister = () => {
         usersService.register(state).then(res => {
-            console.log(res);
+            navigate(PagePaths.LOGIN);
         }).catch(err => {
             console.log({ message: err.response.data, err });
         })

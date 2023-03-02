@@ -1,17 +1,11 @@
 import React from "react";
+import styles from './InputWithLabel.module.css'
+import InputWithLabelProps from "./models/InputWithLabelProps";
 
-interface InputWithLabelProperties {
-    label: string;
-    name: string;
-    value: string;
-    type: "text" | "password";
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-const InputWithLabel: React.FC<InputWithLabelProperties> = ({ label, name, value, type, onChange }) => {
+const InputWithLabel: React.FC<InputWithLabelProps> = ({ label, name, value, type, onChange }): JSX.Element => {
 
     return (
-        <div>
+        <div className={styles.mainDiv}>
             <label htmlFor={name}>{label}</label>
             <input name={name} value={value} type={type} onChange={onChange}></input>
         </div>

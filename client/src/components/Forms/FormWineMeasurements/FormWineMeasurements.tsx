@@ -1,4 +1,4 @@
-const FormWineMeasurements: React.FC = () => {
+const FormWineMeasurements: React.FC = (): JSX.Element => {
 
     return <></>
 }

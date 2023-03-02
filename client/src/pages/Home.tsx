@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/Header/Header";
 
-const WineMeasurements: React.FC = () => {
+const Home: React.FC = () => {
 
     return (
         <div>
@@ -10,4 +10,4 @@ const WineMeasurements: React.FC = () => {
     )
 }
 
-export default WineMeasurements;
+export default Home;

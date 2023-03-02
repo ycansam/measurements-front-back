@@ -1,0 +1,21 @@
+.mainDiv {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.mainDiv>label {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.mainDiv>input {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-bottom: 1px solid #e7e7e7;
+    transition: all ease 0.1s;
+    font-size: 16px;
+}
+.mainDiv>input:focus {
+    border-bottom: 3px solid #2A85FF;
+}
