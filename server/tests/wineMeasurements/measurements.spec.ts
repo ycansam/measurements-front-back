@@ -9,13 +9,13 @@ const setToken = (tokenstr: string) => {
 }
 
 afterAll(done => {
-    done();
+    server.closeServer(done);
 });
 
 describe('GET /measurements before adding', () => {
 
     it('Deberia Obtener el token', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .post('/login')
             .send({ username: 'validuser', password: 'validpassword' });
         expect(res.body.content.token)
@@ -23,7 +23,7 @@ describe('GET /measurements before adding', () => {
     });
 
     it('Deberia obtener las mediciones', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .get('/measurements')
             .set('x-access-token', `${token}`);
         expect(res.status).to.equal(200);
@@ -31,7 +31,7 @@ describe('GET /measurements before adding', () => {
     });
 
     it('No deberia obtener las mediciones, falta el token', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .get('/measurements')
         expect(res.status).to.equal(401);
     });
@@ -39,7 +39,7 @@ describe('GET /measurements before adding', () => {
 
 describe('POST /measurements', () => {
     it('Deberia postear la medicion', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .post('/measurements')
             .set('x-access-token', `${token}`)
             .send({
@@ -56,7 +56,7 @@ describe('POST /measurements', () => {
     });
 
     it('No Deberia postear la medicion, no hay token', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .post('/measurements')
             .send({
                 year: 1990,
@@ -72,7 +72,7 @@ describe('POST /measurements', () => {
     });
 
     it('No Deberia postear la medicion faltan valores obligatorios', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .post('/measurements')
             .set('x-access-token', `${token}`)
             .send({
@@ -86,7 +86,7 @@ describe('POST /measurements', () => {
     });
 
     it('NO Deberia postear la medicion, el hidrogeno es > 15', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .post('/measurements')
             .set('x-access-token', `${token}`)
             .send({
@@ -103,7 +103,7 @@ describe('POST /measurements', () => {
     });
 
     it('NO Deberia postear la medicion, el hidrogeno es < 0', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .post('/measurements')
             .set('x-access-token', `${token}`)
             .send({
@@ -120,7 +120,7 @@ describe('POST /measurements', () => {
     });
 
     it('NO Deberia postear la medicion, el año es negativo', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .post('/measurements')
             .set('x-access-token', `${token}`)
             .send({
@@ -137,7 +137,7 @@ describe('POST /measurements', () => {
     });
 
     it('NO Deberia postear la medicion, variedad esta modificado a un valor inexistente', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .post('/measurements')
             .set('x-access-token', `${token}`)
             .send({
@@ -154,7 +154,7 @@ describe('POST /measurements', () => {
     });
 
     it('NO Deberia postear la medicion, type esta modificado a un valor inexistente', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .post('/measurements')
             .set('x-access-token', `${token}`)
             .send({
@@ -171,7 +171,7 @@ describe('POST /measurements', () => {
     });
 
     it('NO Deberia postear la medicion, año es un texto', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .post('/measurements')
             .set('x-access-token', `${token}`)
             .send({
@@ -187,8 +187,26 @@ describe('POST /measurements', () => {
         expect(res.status).to.equal(400);
     });
 
+    it('NO Deberia postear la medicion, color insuficiente de letras', async () => {
+        const res = await request(server.getApp())
+            .post('/measurements')
+            .set('x-access-token', `${token}`)
+            .send({
+                year: 2000,
+                variety: "Cabernet Sauvignon",
+                type: "Vino blanco",
+                color: "bl",
+                temperature: 0,
+                graduation: 0,
+                hydrogen_potencial: 10,
+                observations: ""
+            });
+        expect(res.status).to.equal(400);
+    });
+
+
     it(' Deberia postear la medicion', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .post('/measurements')
             .set('x-access-token', `${token}`)
             .send({
@@ -209,7 +227,7 @@ describe('POST /measurements', () => {
 describe('GET /measurements after adding', () => {
 
     it('Deberia obtener las mediciones', async () => {
-        const res = await request(server.app)
+        const res = await request(server.getApp())
             .get('/measurements')
             .set('x-access-token', `${token}`);
         expect(res.status).to.equal(200);

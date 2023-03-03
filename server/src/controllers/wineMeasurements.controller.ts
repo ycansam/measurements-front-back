@@ -16,7 +16,6 @@ class WineMeasurementsController {
         const { year, variety, type, color, temperature, graduation, hydrogen_potencial, observations } = req.body as WineMeasure;
 
         if (year < 0) return res.status(400).json({ message: "Year must not be negative!" });
-        if (color && color.length < 1) return res.status(400).json({ message: "color must have any!" });
 
         wineMeasurementsLogic.add({ year, variety, type, color, temperature, graduation, hydrogen_potencial, observations }).then(result => {
             return res.status(200).json({ content: result, message: "Measure Added Correctly" })

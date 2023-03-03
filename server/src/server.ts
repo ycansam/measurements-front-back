@@ -36,18 +36,19 @@ class Server {
 
     private startServer(): void {
         this.connection = this.app.listen(this.port, () => {
-            console.log(`Server listening on port ${this.port}`);
+            if (process.env.NODE_ENV === "development")
+                console.log(`Server listening on port ${this.port}`);
         });
     }
 
     public getApp(): Application {
-        this.connection.close();
         return this.app;
     }
     public closeServer(done: any): void {
+        this.connection.close();
         done();
     }
 }
 
 const server = new Server();
-export default { app: server.getApp(), close: server.closeServer };
+export default server;
