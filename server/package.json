@@ -5,6 +5,8 @@
   "main": "src/server.ts",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --runInBand register.spec.ts login.spec.ts measurements.spec.ts --forceExit",
+    "test:coverage": "npm run test -- --coverage",
+    "test:ci": "cross-env NODE_ENV=test jest --verbose --silent --maxWorkers=1 --coverage --coverageReporters=cobertura --forceExit",
     "start": "NODE_ENV=development ts-node-dev --ignore-watch node_modules src/server.ts",
     "build": "tsc",
     "dev": "cross-env NODE_ENV=development ts-node-dev   --respawn --ignore-watch node_modules src/server.ts"

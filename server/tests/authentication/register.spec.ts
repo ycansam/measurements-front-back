@@ -5,6 +5,7 @@ import database from '../../src/database';
 beforeAll(() => {
     database.clearDatabase();
 })
+
 afterAll(done => {
     server.closeServer(done);
 });
