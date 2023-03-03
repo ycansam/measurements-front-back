@@ -1,14 +1,15 @@
 import router from './service-router';
 import WineMeasure from '../models/wineMeasurements/wineMeasure.model';
-
+import routerHeaders from './router-headers';
 class WineMeasurementsService {
 
     getAll() {
-        return router.get(`/measurements`);
+        console.log(routerHeaders.setHeaders())
+        return router.get(`/measurements`, routerHeaders.setHeaders());
     }
 
     add(data: WineMeasure) {
-        return router.post(`/measurements`, data);
+        return router.post(`/measurements`, data, routerHeaders.setHeaders());
     }
 
 }

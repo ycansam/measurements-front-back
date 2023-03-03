@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import server from '../../src/server'
 import database from '../../src/database';
 beforeAll(() => {
-    database.clearTestingDatabase();
+    database.clearDatabase();
 })
 afterAll(done => {
     done();
@@ -31,10 +31,18 @@ describe('POST /registry', () => {
         expect(res.status).to.equal(401);
     });
 
+    it('Deberia dar 401 no hay usuario', async () => {
+        const res = await request(server.app)
+            .post('/registry')
+            .send({ password: 'invalidpassword' });
+        expect(res.status).to.equal(401);
+    });
+
     it('Deberia dar 401 debe haber un minimo de contraseña de 4', async () => {
         const res = await request(server.app)
             .post('/registry')
             .send({ username: 'validuser3', password: 'inv' });
         expect(res.status).to.equal(401);
     });
+
 });

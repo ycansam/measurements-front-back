@@ -2,6 +2,7 @@ import express, { Application, urlencoded } from 'express';
 import Endpoints from './Endpoints';
 import wineMeasurementsRoutes from './routes/wineMeasurements.routes';
 import usersRoutes from './routes/users.routes';
+import userAuthenticationMiddleware from './middlewares/userAuthentication.middleware';
 const cors = require('cors');
 
 class Server {
@@ -29,7 +30,7 @@ class Server {
 
     private setRoutes(): void {
         this.app.use(Endpoints.USERS.DEFAULT_PATH, usersRoutes);
-        this.app.use(Endpoints.WINE_MEASUREMENTS.DEFAULT_PATH, wineMeasurementsRoutes);
+        this.app.use(Endpoints.WINE_MEASUREMENTS.DEFAULT_PATH, userAuthenticationMiddleware.verifyToken, wineMeasurementsRoutes);
     }
 
 
@@ -43,10 +44,7 @@ class Server {
         this.connection.close();
         return this.app;
     }
-    public closeServer(done: any): void {
-        done();
-    }
+
 }
 
 const server = new Server();
-export default { app: server.getApp(), close: server.closeServer };

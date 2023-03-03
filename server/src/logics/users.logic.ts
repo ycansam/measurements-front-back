@@ -1,33 +1,24 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const TIME_TO_EXPIRE = 86400;
-const SALT_ROUNDS = 10;
-const PRIVATE_JWT = "wine-measures-private" // must be on .env
-
+import userAuthenticationMiddleware from "../middlewares/userAuthentication.middleware";
 import database from "../database";
 import User from "../models/user.model";
 import UsersQueries from "../queries/users.queries";
+import BcryptService from "../services/bcrypt.service";
+import UserJWTService from "../services/userJWT.service";
 
 class UsersLogic {
 
     public register = async ({ username, password }: User): Promise<object | boolean> => {
 
+        if (!username) return Promise.reject("Username required");
         if (password.length < 4) return Promise.reject("Password needs a minimum length of 4");
 
-        const hashedPass = await this.hashPassword(password);
+        const hashedPass = await BcryptService.hashPassword(password);
         if (!hashedPass) return Promise.reject("Error on hashing password");
 
         const result = await database.createQuery(UsersQueries.ADD(username, hashedPass as string));
         if (result.insertId) return Promise.resolve(result);
         return Promise.reject(result);
     }
-
-    private async hashPassword(password: string): Promise<string | boolean> {
-        const hashedPass = await bcrypt.hash(password, SALT_ROUNDS);
-        if (hashedPass) return hashedPass;
-        return false
-    }
-
 
     public login = async ({ username, password }: User): Promise<string | boolean> => {
 
@@ -41,27 +32,22 @@ class UsersLogic {
     }
 
     private Authenticate = async (user: User, password: string): Promise<boolean | string> => {
-        const isMatch = await this.comparePasswords(user, password);
+        const isMatch = await BcryptService.comparePasswords(user.password, password);
         if (!isMatch) return isMatch;
 
         return this.generateToken(user);
     }
 
-    private async comparePasswords(user: User, password: string): Promise<boolean> {
-        return await bcrypt.compare(password, user.password);
-    }
-
     private generateToken(user: User): string {
-        return jwt.sign({ id: user.id, username: user.username }, PRIVATE_JWT, { expiresIn: TIME_TO_EXPIRE });
+        return UserJWTService.signUserToken(user);
     }
 
     private findUserByUsername = async (username: string): Promise<User | boolean> => {
         const foundUser = await database.createQuery(UsersQueries.GET_BY_USERNAME(username));
+        console.log(foundUser);
         if (foundUser.length > 0) return foundUser[0] as User;
         return false;
     }
-
-
 
 }
 

@@ -9,7 +9,7 @@ class WineMeasurementsRouter extends AppRouter {
         this.add();
     }
 
-    private getAll = () => this.router.get(Endpoints.WINE_MEASUREMENTS.GET_ALL, wineMeasurementsController.getAll)
+    private getAll = () => this.router.get(Endpoints.WINE_MEASUREMENTS.GET_ALL, wineMeasurementsController.getAll )
     private add = () => this.router.post(Endpoints.WINE_MEASUREMENTS.CREATE, wineMeasurementsController.add)
 }
 
