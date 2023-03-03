@@ -30,7 +30,7 @@ class Server {
 
     private setRoutes(): void {
         this.app.use(Endpoints.USERS.DEFAULT_PATH, usersRoutes);
-        this.app.use(Endpoints.WINE_MEASUREMENTS.DEFAULT_PATH, userAuthenticationMiddleware.verifyToken, wineMeasurementsRoutes);
+        this.app.use(Endpoints.WINE_MEASUREMENTS.DEFAULT_PATH, userAuthenticationMiddleware.verifyToken, wineMeasurementsRoutes,);
     }
 
 
@@ -44,7 +44,10 @@ class Server {
         this.connection.close();
         return this.app;
     }
-
+    public closeServer(done: any): void {
+        done();
+    }
 }
 
 const server = new Server();
+export default { app: server.getApp(), close: server.closeServer };

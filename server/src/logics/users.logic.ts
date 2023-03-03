@@ -44,7 +44,6 @@ class UsersLogic {
 
     private findUserByUsername = async (username: string): Promise<User | boolean> => {
         const foundUser = await database.createQuery(UsersQueries.GET_BY_USERNAME(username));
-        console.log(foundUser);
         if (foundUser.length > 0) return foundUser[0] as User;
         return false;
     }

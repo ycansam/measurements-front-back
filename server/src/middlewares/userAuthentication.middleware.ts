@@ -7,12 +7,7 @@ class UserAuthenticationMiddleware {
         if (!token) return res.status(401).json({ message: "There is no token!" });
 
         const verified = UserJWTService.verifyToken(token);
-
-        try {
-            if (verified.message.JsonWebTokenError) return res.status(401).json({ message: "Token not verified!" });
-        } catch (err) {
-            console.error(err);
-        }
+        if (verified?.message?.JsonWebTokenError) return res.status(401).json({ message: "Token not verified!" });
         next();
 
     }
