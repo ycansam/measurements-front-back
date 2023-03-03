@@ -1,1 +1,2 @@
 CREATE DATABASE wine_measurements;
+CREATE DATABASE wine_measurements_testing;

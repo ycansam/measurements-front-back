@@ -6,6 +6,7 @@ const cors = require('cors');
 
 class Server {
     private app: Application;
+    private connection: any;
     private readonly port: number = 3001;
     private readonly corsOptions = {
         origin: '*',
@@ -33,10 +34,19 @@ class Server {
 
 
     private startServer(): void {
-        this.app.listen(this.port, () => {
+        this.connection = this.app.listen(this.port, () => {
             console.log(`Server listening on port ${this.port}`);
         });
+    }
+
+    public getApp(): Application {
+        this.connection.close();
+        return this.app;
+    }
+    public closeServer(done: any): void {
+        done();
     }
 }
 
 const server = new Server();
+export default { app: server.getApp(), close: server.closeServer };

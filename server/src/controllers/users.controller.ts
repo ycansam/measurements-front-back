@@ -7,7 +7,7 @@ class UsersController {
         await usersLogic.login({ username, password }).then(token => {
             return res.status(200).json({ content: { token }, message: "User logged correctly" });
         }).catch(err => {
-            return res.status(400).json(err);
+            return res.status(401).json(err);
         })
     }
 
@@ -17,7 +17,7 @@ class UsersController {
         await usersLogic.register({ username, password }).then(result => {
             return res.status(200).json({ content: result, message: "User registred" });
         }).catch(err => {
-            return res.status(400).json(err);
+            return res.status(401).json(err);
         })
 
     }

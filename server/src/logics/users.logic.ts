@@ -12,6 +12,8 @@ class UsersLogic {
 
     public register = async ({ username, password }: User): Promise<object | boolean> => {
 
+        if (password.length < 4) return Promise.reject("Password needs a minimum length of 4");
+
         const hashedPass = await this.hashPassword(password);
         if (!hashedPass) return Promise.reject("Error on hashing password");
 
