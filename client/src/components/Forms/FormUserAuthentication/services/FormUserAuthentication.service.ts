@@ -1,5 +1,4 @@
-import usersService from "../../../../services/podcasts.service";
-import User from "../../../../models/user.model";
+import usersService from "../../../../services/users.service";
 import { useNavigate } from "react-router";
 import userJWTCache from "../../../../services/cache/userJWT.cache";
 import PagePaths from "../../../../page-paths";

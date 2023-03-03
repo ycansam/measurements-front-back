@@ -9,13 +9,15 @@
     font-weight: 500;
 }
 
-.mainDiv>input {
+.mainDiv>select {
+    border: 0px;
+    outline: none;
     margin-bottom: 1rem;
     padding: 0.5rem;
     border-bottom: 1px solid #e7e7e7;
     transition: all ease 0.1s;
     font-size: 16px;
 }
-.mainDiv>input:focus {
+.mainDiv>select:focus {
     border-bottom: 3px solid #2A85FF;
 }

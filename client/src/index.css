@@ -21,6 +21,5 @@ input:focus{
   outline: none;
 }
 *{
-  box-sizing: border-box;
   margin: 0px;
 }
