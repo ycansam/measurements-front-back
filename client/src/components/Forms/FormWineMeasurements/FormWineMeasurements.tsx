@@ -6,12 +6,11 @@ import FormWineMeasurementsHooksReturn from "./models/FormWineMeasurementsHooksR
 import FormWineMeasurementsService from "./services/FormWineMeasurements.service";
 import FormWineMeasurementsServiceReturn from "./models/FormWineMeasurementsServiceReturn";
 import WineMeasureClass from "../../../models/wineMeasurements/wineMeasure.class";
-
 const textVariables = {
     h1: 'Registrar Medición',
     btnSubmit: 'Enviar'
 }
-const FormWineMeasurements: React.FC = () => {
+const FormWineMeasurements: React.FC = (): JSX.Element => {
 
     const { state, handleChange, handleChangeSelector } = FormWineMeasurementsHooks() as FormWineMeasurementsHooksReturn;
     const { handleSubmit } = FormWineMeasurementsService({ state }) as FormWineMeasurementsServiceReturn;
