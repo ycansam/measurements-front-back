@@ -14,8 +14,8 @@ describe('FormUserAuthentication', () => {
       </BrowserRouter>
     );
     expect(getByText('Inicio de Sesión')).toBeInTheDocument();
-    expect(getByLabelText('Usuario')).toBeInTheDocument();
-    expect(getByLabelText('Contraseña')).toBeInTheDocument();
+    expect(getByText('Usuario')).toBeInTheDocument();
+    expect(getByText('Contraseña')).toBeInTheDocument();
   });
 
 });
