@@ -7,7 +7,7 @@ const InputWithLabel: React.FC<InputWithLabelProps> = ({ label, name, value, typ
     return (
         <div className={styles.mainDiv}>
             <label htmlFor={name}>{label}</label>
-            <input name={name} value={value} type={type} required={required} onChange={onChange}></input>
+            <input id={"IL" + name} name={name} value={value} type={type} required={required} onChange={onChange}></input>
         </div>
     )
 }

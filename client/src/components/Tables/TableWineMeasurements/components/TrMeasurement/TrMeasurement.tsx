@@ -1,7 +1,8 @@
 import TrMeasurementProps from './models/TrMeasurementProps.model';
+import React from 'react';
 const TrMeasurement: React.FC<TrMeasurementProps> = ({ measure: { year, variety, type, color, temperature, graduation, hydrogen_potencial, observations } }) => {
 
-    return <tr >
+    return <tr data-testid="measurement-row">
         <td>{year}</td>
         <td>{variety}</td>
         <td>{type}</td>

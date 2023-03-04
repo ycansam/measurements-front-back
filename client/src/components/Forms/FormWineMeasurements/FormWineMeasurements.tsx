@@ -6,6 +6,7 @@ import FormWineMeasurementsHooksReturn from "./models/FormWineMeasurementsHooksR
 import FormWineMeasurementsService from "./services/FormWineMeasurements.service";
 import FormWineMeasurementsServiceReturn from "./models/FormWineMeasurementsServiceReturn";
 import WineMeasureClass from "../../../models/wineMeasurements/wineMeasure.class";
+import React from "react";
 const textVariables = {
     h1: 'Registrar Medición',
     btnSubmit: 'Enviar'
