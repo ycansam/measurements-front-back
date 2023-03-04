@@ -9,7 +9,8 @@ CREATE TABLE `wine_measurements` (
 	`hydrogen_potencial` INT(2) UNSIGNED NOT NULL,
 	`observations` VARCHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
 	PRIMARY KEY (`id`) USING BTREE,
-	CONSTRAINT `check_hydrogen_potencial` CHECK (`hydrogen_potencial` >= 0 and `hydrogen_potencial` <= 14)
+	CONSTRAINT `check_hydrogen_potencial` CHECK (`hydrogen_potencial` >= 0 and `hydrogen_potencial` <= 14),
+	CONSTRAINT `check_color_length` CHECK (length(`color`) >= 3)
 )
 COLLATE='latin1_swedish_ci'
 ENGINE=InnoDB

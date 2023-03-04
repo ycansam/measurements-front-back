@@ -5,6 +5,7 @@ import styles from '../../../styles/forms.module.css';
 import FormUserAuthenticationProps from "./models/FormUserAuthenticationProps.model";
 import FormUserAuthenticationHooksReturn from "./models/FormUserAuthenticationHooksReturn";
 import FormUserAuthenticationServiceReturn from "./models/FormUserAuthenticationServiceReturn";
+import React from "react";
 const textVariables = {
     login: {
         h1: 'Inicio de Sesión',
