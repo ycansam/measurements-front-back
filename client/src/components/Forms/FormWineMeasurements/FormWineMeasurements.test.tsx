@@ -4,11 +4,11 @@
 import FormWineMeasurements from './FormWineMeasurements';
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
-describe('FormUserAuthentication', () => {
+describe('FormWineMeasurements', () => {
 
-    it('renders correctly', () => {
+    it('Deberia renderizar el componente', () => {
         const { getByText } = render(
             <BrowserRouter>
                 <FormWineMeasurements />

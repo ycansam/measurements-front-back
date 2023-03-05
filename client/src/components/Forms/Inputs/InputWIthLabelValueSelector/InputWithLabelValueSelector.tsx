@@ -6,7 +6,7 @@ const InputWithLabelValueSelector: React.FC<InputWithLabelValueSelectorProps> = 
     return (
         <div className={styles.mainDiv}>
             <label htmlFor={name}>{label}</label>
-            <select name={name} onChange={onChange} value={value} required={required} >
+            <select id={'IS' + name} name={name} onChange={onChange} value={value} required={required} >
                 {
                     options.map((item, index) => {
                         return (<option key={index} value={item}>{item}</option>)

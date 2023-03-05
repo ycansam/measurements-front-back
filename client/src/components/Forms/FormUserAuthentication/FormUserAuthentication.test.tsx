@@ -43,14 +43,6 @@ describe('FormUserAuthentication', () => {
     expect(handleSubmit).toHaveBeenCalled();
   });
 
-  it('Envia el formulario on clicka', () => {
-    const { getByRole, getByLabelText } = render(
-      <BrowserRouter>
-        <FormUserAuthentication authenticationType="login" />
-      </BrowserRouter>
-    );
-  });
-
 });
 
 export { }

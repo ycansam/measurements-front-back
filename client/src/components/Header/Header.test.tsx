@@ -4,12 +4,12 @@
 import Header from './Header';
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
-describe('FormUserAuthentication', () => {
+describe('Header', () => {
 
-    it('renders correctly', () => {
-        const { getByText } = render(
+    it('Deberia renderizar el Header', () => {
+        render(
             <BrowserRouter>
                 <Header />
             </BrowserRouter>
