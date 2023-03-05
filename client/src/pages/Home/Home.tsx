@@ -14,7 +14,7 @@ const Home: React.FC = () => {
     return (
         <div>
             <Header />
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', padding: '0rem 1rem 1rem 1rem' }}>
                 <HomeContext.Provider value={{ fetchMeasurements } as HomeContextModel}>
                     <FormWineMeasurements />
                 </HomeContext.Provider>

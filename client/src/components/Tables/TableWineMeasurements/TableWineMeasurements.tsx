@@ -1,11 +1,12 @@
 import TableWineMeasurementsProps from './models/TableWineMeasurementsProps.model'
 import TrMeasurement from './components/TrMeasurement/TrMeasurement'
 import React from 'react'
+import styles from './TableWineMeasurements.module.css'
 const headers = ["Año", "Variedad", "Tipo", "Color", "Temperatura", "Graduacion", "Potencial De Hidrogeno", "Observaciones"]
 
 const TableWIneMeasurements: React.FC<TableWineMeasurementsProps> = ({ measurements }) => {
 
-    return <table >
+    return <table className={styles.mainTable} >
         <thead>
             <tr>
                 {headers.map((title, index) => <th key={index}>{title}</th>)}
